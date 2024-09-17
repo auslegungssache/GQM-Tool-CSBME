@@ -1,15 +1,15 @@
+using Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend
 {
-    public class DatabaaseContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        //DBSets
-
-
         public string DbPath { get; }
+        
+        public DbSet<User> Users { get; set; }
 
-        public DatabaaseContext()
+        public DatabaseContext()
         {
             var path = Directory.GetCurrentDirectory();
             DbPath = System.IO.Path.Join(path, "gqm.db");

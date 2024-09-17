@@ -1,0 +1,17 @@
+﻿@page "/"
+@inherits Counter
+@rendermode InteractiveServer
+
+<ul>
+    @foreach (var user in Users())
+    {
+        <li>
+            <div>ID</div>
+            <div>@user.Id</div>
+        </li>
+    }
+</ul>
+<button @onclick="NewUser">New</button>
+
+@code {
+}
