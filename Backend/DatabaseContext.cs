@@ -12,8 +12,8 @@ namespace Backend
 
         public DatabaseContext()
         {
-            var path = Directory.GetParent(Environment.CurrentDirectory)!.FullName + "\\Backend\\";
-			DbPath = System.IO.Path.Join(path, "gqm.db");
+            var path = Directory.GetCurrentDirectory();
+            DbPath = System.IO.Path.Join(path, "gqm.db");
         }
 
         // The following configures EF to create a Sqlite database file in the
