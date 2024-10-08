@@ -1,11 +1,10 @@
 ﻿using Backend;
 using Backend.Entities;
 using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
 
 namespace WWW.Components.Pages;
 
-public class Counter : ComponentBase
+public partial class Index : ComponentBase
 {
     [Inject]
     protected DatabaseContext Context { get; set; } = default!;

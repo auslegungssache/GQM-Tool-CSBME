@@ -14,12 +14,24 @@ public partial class QuestionView : ComponentBase
     
     [Parameter]
     public Action Refresh { get; set; } = null;
+    
+    public Question Question { get; set; } = null;
+    protected override void OnInitialized()
+    {
+        Question = Context.Set<Question>()
+            .Find(Id)!;
+    }
+
+    protected void OnSubmit()
+    {
+        Context.SaveChanges();
+        Refresh?.Invoke();
+    }
 
     public void Delete()
     {
-        var question = Context.Set<Question>().Find(Id);
         Context.Set<Question>()
-            .Remove(question);
+            .Remove(Question);
 
         Context.SaveChanges();
         Refresh();

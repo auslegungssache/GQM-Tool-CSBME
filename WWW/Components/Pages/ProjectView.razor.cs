@@ -12,22 +12,28 @@ public partial class ProjectView : ComponentBase
 
     [Parameter, EditorRequired] public string Id { get; set; } = null;
     
+    public Project Project { get; set; }
+    
     [Parameter]
     public Action Refresh { get; set; } = null;
 
-    public List<Goal> Goals()
+    protected override void OnInitialized()
     {
-        var project = Context.Projects
+        Project = Context.Set<Project>()
             .Include(p => p.Goals)
-            .FirstOrDefault(p => p.Id == Id);
-        
-        return project?.Goals ?? [];
+            .FirstOrDefault(p => p.Id == Id)!;
+    }
+
+    public void OnSubmit()
+    {
+        Context.SaveChanges();
+        Refresh();
     }
 
     public void NewGoal()
     {
-        Goal goal = new Goal();
-        Context.Find<Project>(Id)?
+        Goal goal = new();
+        Project
             .Goals.Add(goal);
 
         Context.SaveChanges();
@@ -35,8 +41,7 @@ public partial class ProjectView : ComponentBase
 
     public void Delete()
     {
-        var project = Context.Projects.FirstOrDefault(p => p.Id == Id);
-        Context.Projects.Remove(project);
+        Context.Projects.Remove(Project);
         
         Context.SaveChanges();
         Refresh();

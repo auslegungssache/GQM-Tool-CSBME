@@ -2,6 +2,17 @@
 
 <div>
     <div>Goal ID: @Id</div>
+
+    <EditForm Model="@Goal" OnSubmit="@OnSubmit">
+        <div>
+            <InputText id="goal-title" @bind-Value="@Goal.Title"/>
+        </div>
+
+        <div>
+            <button type="submit" @onclick="@OnSubmit">Submit</button>
+        </div>
+    </EditForm>
+    
     <button @onclick="Delete">Delete Goal</button>
     
     <div>
@@ -9,7 +20,7 @@
 
         <button @onclick="NewQuestion">New Question</button>
         <ol>
-            @foreach (var question in Questions())
+            @foreach (var question in Goal.Questions)
             {
                 <li>
                     <QuestionView Id="@question.Id" Refresh="Refresh" />

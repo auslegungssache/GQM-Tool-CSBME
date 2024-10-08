@@ -15,30 +15,30 @@ public partial class GoalView : ComponentBase
     [Parameter]
     public Action Refresh { get; set; } = null;
     
-    public List<Question> Questions()
+    public Goal Goal { get; set; }
+    protected override void OnInitialized()
     {
-        var goal = Context
-            .Set<Goal>()
-            .Include(g => g.Questions)
-            .FirstOrDefault(g => g.Id == Id);
-        
-        return goal?.Questions ?? [];
+        Goal = Context.Set<Goal>()
+            .Find(Id);
+    }
+
+    public void OnSubmit()
+    {
+        Context.SaveChanges();
+        Refresh();
     }
     
     public void NewQuestion()
     {
         Question question = new();
-        Context.Find<Goal>(Id)?
-            .Questions.Add(question);
+        Goal.Questions.Add(question);
 
         Context.SaveChanges();
     }
 
     public void Delete()
     {
-        var goal = Context.Find<Goal>(Id);
-        Context.Set<Goal>()
-            .Remove(goal);
+        Context.Set<Goal>().Remove(Goal);
 
         Context.SaveChanges();
         Refresh();

@@ -7,5 +7,6 @@ public class Goal
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string Id { get; set; }
 
+    public string Title { get; set; } = "";
     public List<Question> Questions { get; set; } = [];
 }
