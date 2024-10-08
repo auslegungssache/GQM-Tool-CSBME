@@ -10,11 +10,28 @@ public class Counter : ComponentBase
     [Inject]
     protected DatabaseContext Context { get; set; } = default!;
 
+    protected List<Project> Projects { get; set; } = [];
+
+    protected override void OnInitialized()
+    {
+        Projects = Context.Projects
+            .ToList();
+    }
+
 
     public List<User> Users()
     {
         return Context.Users
             .ToList();
+    }
+
+    public void NewProject()
+    {
+        Project project  = new();
+        Context.Projects.Add(project);
+        Context.SaveChanges();
+        
+        Refresh();
     }
 
     public void NewUser()
@@ -26,5 +43,11 @@ public class Counter : ComponentBase
 
         Context.Users.Add(newUser);
         Context.SaveChanges();
+    }
+
+    public void Refresh()
+    {
+        Projects = Context.Projects.ToList();
+        StateHasChanged();
     }
 }

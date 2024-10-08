@@ -1,0 +1,20 @@
+﻿@rendermode InteractiveServer
+
+<div>
+    <div>Goal ID: @Id</div>
+    <button @onclick="Delete">Delete Goal</button>
+    
+    <div>
+        <h4>Questions</h4>
+
+        <button @onclick="NewQuestion">New Question</button>
+        <ol>
+            @foreach (var question in Questions())
+            {
+                <li>
+                    <QuestionView Id="@question.Id" Refresh="Refresh" />
+                </li>
+            }
+        </ol>
+    </div>
+</div>

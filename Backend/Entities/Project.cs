@@ -7,5 +7,6 @@ public class Project
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string Id { get; set; }
     
-    public List<Goal> Goals { get; set; }
+    public List<Goal> Goals { get; set; } = [];
+    
 }

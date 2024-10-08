@@ -2,6 +2,7 @@
 @inherits Counter
 @rendermode InteractiveServer
 
+<div>
 <ul>
     @foreach (var user in Users())
     {
@@ -11,7 +12,19 @@
         </li>
     }
 </ul>
-<button @onclick="NewUser">New</button>
+</div>
+<button @onclick="NewUser">New user</button>
 
-@code {
-}
+<div>
+    <h2>Projects</h2>
+    <button @onclick="NewProject">New Project</button>
+
+    <ol>
+        @foreach (var project in Projects)
+        {
+            <li>
+                <ProjectView Id="@project.Id" Refresh="Refresh" />
+            </li>
+        }    
+    </ol>
+</div>
