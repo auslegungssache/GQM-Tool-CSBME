@@ -3,7 +3,7 @@
 <div>
     <div>Project ID: @Id</div>
     
-    <EditForm Model="@Project" OnSubmit="@OnSubmit">
+    <EditForm EditContext="EditContext" OnSubmit="@OnSubmit">
         <div>
             <InputText id="project-title" @bind-Value="@Project.Title"/>
         </div>

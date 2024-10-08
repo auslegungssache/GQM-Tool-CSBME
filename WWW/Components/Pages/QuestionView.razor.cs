@@ -1,6 +1,7 @@
 ﻿using Backend;
 using Backend.Entities;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 
 namespace WWW.Components.Pages;
@@ -16,15 +17,20 @@ public partial class QuestionView : ComponentBase
     public Action Refresh { get; set; } = null;
     
     public Question Question { get; set; } = null;
+    public EditContext EditContext { get; set; } = default!;
+    
     protected override void OnInitialized()
     {
         Question = Context.Set<Question>()
             .Find(Id)!;
+        
+        EditContext = new EditContext(Question);
     }
 
     protected void OnSubmit()
     {
         Context.SaveChanges();
+        EditContext.MarkAsUnmodified();
         Refresh?.Invoke();
     }
 

@@ -1,6 +1,7 @@
 ﻿using Backend;
 using Backend.Entities;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 
 namespace WWW.Components.Pages;
@@ -14,17 +15,21 @@ public partial class GoalView : ComponentBase
     
     [Parameter]
     public Action Refresh { get; set; } = null;
+    public EditContext EditContext { get; set; } = default!;
     
     public Goal Goal { get; set; }
     protected override void OnInitialized()
     {
         Goal = Context.Set<Goal>()
-            .Find(Id);
+            .Find(Id)!;
+        
+        EditContext = new EditContext(Goal);
     }
 
     public void OnSubmit()
     {
         Context.SaveChanges();
+        EditContext.MarkAsUnmodified();
         Refresh();
     }
     

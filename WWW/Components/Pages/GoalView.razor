@@ -1,11 +1,17 @@
-﻿@rendermode InteractiveServer
+﻿@using Backend.Entities
+@rendermode InteractiveServer
 
 <div>
     <div>Goal ID: @Id</div>
 
-    <EditForm Model="@Goal" OnSubmit="@OnSubmit">
+    <EditForm EditContext="@EditContext" OnSubmit="@OnSubmit">
         <div>
             <InputText id="goal-title" @bind-Value="@Goal.Title"/>
+            <InputSelect @bind-Value="@Goal.Priority">
+                <option value="@GoalPriority.High">High</option>
+                <option value="@GoalPriority.Medium">Medium</option>
+                <option value="@GoalPriority.Low">Low</option>
+            </InputSelect>
         </div>
 
         <div>

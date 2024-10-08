@@ -1,6 +1,7 @@
 ﻿using Backend;
 using Backend.Entities;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 
 namespace WWW.Components.Pages;
@@ -13,6 +14,7 @@ public partial class ProjectView : ComponentBase
     [Parameter, EditorRequired] public string Id { get; set; } = null;
     
     public Project Project { get; set; }
+    public EditContext EditContext { get; set; }
     
     [Parameter]
     public Action Refresh { get; set; } = null;
@@ -22,11 +24,14 @@ public partial class ProjectView : ComponentBase
         Project = Context.Set<Project>()
             .Include(p => p.Goals)
             .FirstOrDefault(p => p.Id == Id)!;
+        
+        EditContext = new EditContext(Project);
     }
 
     public void OnSubmit()
     {
         Context.SaveChanges();
+        EditContext.MarkAsUnmodified();
         Refresh();
     }
 

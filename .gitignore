@@ -1,5 +1,5 @@
 .idea
-*.db
+*/gqm.db*
 /Backend/Migrations/
 
 ## Ignore Visual Studio temporary files, build results, and

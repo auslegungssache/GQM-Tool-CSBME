@@ -2,7 +2,7 @@
 
 <div>
     <div>Question ID: @Id</div>
-    <EditForm Model="@Question" OnSubmit="@OnSubmit">
+    <EditForm EditContext="EditContext" OnSubmit="@OnSubmit">
         <div>
             <InputText id="question-title" @bind-Value="@Question.Title"/>
         </div>
