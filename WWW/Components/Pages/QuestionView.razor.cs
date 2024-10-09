@@ -13,7 +13,7 @@ public partial class QuestionView : ComponentBase
     
     [Parameter, EditorRequired] public string Id { get; set; } = null;
     
-    [Parameter]
+    [Parameter, EditorRequired]
     public Action Refresh { get; set; } = null;
     
     public Question Question { get; set; } = null;

@@ -13,7 +13,7 @@ public partial class GoalView : ComponentBase
     
     [Parameter, EditorRequired] public string Id { get; set; } = null;
     
-    [Parameter]
+    [Parameter, EditorRequired]
     public Action Refresh { get; set; } = null;
     public EditContext EditContext { get; set; } = default!;
     
