@@ -31,3 +31,26 @@
         </ol>
     </div>
 </div>
+
+@code
+{
+    public void NewGoal()
+    {
+        ViewService.NewGoal(Project);
+    }
+    
+    public void OnSubmit()
+    {
+        Context.SaveChanges();
+        EditContext.MarkAsUnmodified();
+        ViewService.RefreshView();
+    }
+    
+    public void DeleteSelf()
+    {
+        if (IsBeingDeleted) return;
+        IsBeingDeleted = true;
+        
+        ViewService.DeleteEntity(Project);
+    }
+}

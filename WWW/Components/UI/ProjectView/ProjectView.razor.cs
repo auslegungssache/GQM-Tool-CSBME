@@ -13,7 +13,7 @@ public partial class ProjectView : ComponentBase
     protected DatabaseContext Context { get; set; } = default!;
     [Inject] protected ProjectViewService ViewService { get; set; } = default!;
 
-    [Parameter, EditorRequired] public string Id { get; set; } = null;
+    [Parameter, EditorRequired] public ProjectId Id { get; set; } = null;
     
     private bool IsBeingDeleted {get; set;}
 
@@ -51,23 +51,4 @@ public partial class ProjectView : ComponentBase
         EditContext = new EditContext(Project);
     }
 
-    public void OnSubmit()
-    {
-        Context.SaveChanges();
-        EditContext.MarkAsUnmodified();
-        ViewService.RefreshView();
-    }
-
-    public void NewGoal()
-    {
-        ViewService.NewGoal(Project);
-    }
-
-    public void DeleteSelf()
-    {
-        if (IsBeingDeleted) return;
-        IsBeingDeleted = true;
-        
-        ViewService.DeleteEntity(Project);
-    }
 }

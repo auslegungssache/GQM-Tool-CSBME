@@ -1,13 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Backend.Entities;
+﻿namespace Backend.Entities;
 
 public class Project
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string Id { get; set; }
+    public ProjectId Id { get; set; } = ProjectId.Make();
 
     public string Title { get; set; } = "";
     public List<Goal> Goals { get; set; } = [];
     
+}
+
+public record ProjectId(string Value) : Id
+{
+    public static ProjectId Make()
+    {
+        return new ProjectId(MakeId());
+    }
+    
+    public override string ToString()
+    {
+        return base.ToString();
+    }
 }

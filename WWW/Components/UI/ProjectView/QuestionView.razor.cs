@@ -2,7 +2,6 @@
 using Backend.Entities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.EntityFrameworkCore;
 using WWW.Services;
 
 namespace WWW.Components.UI;
@@ -14,7 +13,7 @@ public partial class QuestionView : ComponentBase
     [Inject] protected ProjectViewService ViewService { get; set; } = default!;
 
     
-    [Parameter, EditorRequired] public string Id { get; set; } = null;
+    [Parameter, EditorRequired] public QuestionId Id { get; set; } = null;
     public Question Question { get; set; } = null;
     
 

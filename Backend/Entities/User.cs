@@ -1,15 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Backend.Entities;
+﻿namespace Backend.Entities;
 
 public enum Role { Admin, User }
 
 public class User
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string Id { get; set; }
+    public UserId Id { get; set; } = UserId.Make();
     
     public string Username { get; set; }
     
     public Role Role { get; set; }
+}
+
+public record UserId(string Value) : Id
+{
+    public static UserId Make()
+    {
+        return new UserId(MakeId());
+    }
+    
+    public override string ToString()
+    {
+        return base.ToString();
+    }
 }

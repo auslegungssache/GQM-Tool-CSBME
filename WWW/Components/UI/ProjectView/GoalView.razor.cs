@@ -13,7 +13,7 @@ public partial class GoalView : ComponentBase
     protected DatabaseContext Context { get; set; } = default!;
     [Inject] protected ProjectViewService ViewService { get; set; } = default!;
     
-    [Parameter, EditorRequired] public string Id { get; set; } = null;
+    [Parameter, EditorRequired] public GoalId Id { get; set; } = null;
     
     private bool IsBeingDeleted { get; set; }
     
