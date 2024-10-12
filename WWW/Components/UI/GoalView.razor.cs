@@ -5,20 +5,21 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 using WWW.Services;
 
-namespace WWW.Components.Components;
+namespace WWW.Components.UI;
 
-public partial class ProjectView : ComponentBase
+public partial class GoalView : ComponentBase
 {
     [Inject]
     protected DatabaseContext Context { get; set; } = default!;
     [Inject] protected ProjectViewService ViewService { get; set; } = default!;
-
+    
     [Parameter, EditorRequired] public string Id { get; set; } = null;
     
-    private bool IsBeingDeleted {get; set;}
+    private bool IsBeingDeleted { get; set; }
+    
+    public EditContext EditContext { get; set; } = default!;
 
-    public Project Project { get; set; } = default!;
-    public EditContext EditContext { get; set; }
+    public Goal Goal { get; set; } = default!;
     
     protected override void OnParametersSet()
     {
@@ -36,31 +37,19 @@ public partial class ProjectView : ComponentBase
     {
         await InvokeAsync(StateHasChanged);
     }
-    
-    void IDisposable.Dispose()
-    {
-        ViewService.ListChanged -= OnListChanged;
-    }
 
-    private void Load()
+    protected void Load()
     {
-        Project = Context.Set<Project>()
-            .Include(p => p.Goals)
-            .FirstOrDefault(p => p.Id == Id)!;
+        Goal = Context.Set<Goal>()
+            .Include(g => g.Questions)
+            .FirstOrDefault(g => g.Id == Id)!;
         
-        EditContext = new EditContext(Project);
+        EditContext = new EditContext(Goal);
     }
 
-    public void OnSubmit()
+    public void NewQuestion()
     {
-        Context.SaveChanges();
-        EditContext.MarkAsUnmodified();
-        ViewService.RefreshView();
-    }
-
-    public void NewGoal()
-    {
-        ViewService.NewGoal(Project);
+        ViewService.NewQuestion(Goal);
     }
 
     public void DeleteSelf()
@@ -68,6 +57,13 @@ public partial class ProjectView : ComponentBase
         if (IsBeingDeleted) return;
         IsBeingDeleted = true;
         
-        ViewService.DeleteEntity(Project);
+        ViewService.DeleteEntity(Goal);
+    }
+
+    public void OnSubmit()
+    {
+        Context.SaveChanges();
+        EditContext.MarkAsUnmodified();
+        ViewService.RefreshView();
     }
 }

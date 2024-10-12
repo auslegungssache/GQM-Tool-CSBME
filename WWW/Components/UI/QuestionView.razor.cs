@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 using WWW.Services;
 
-namespace WWW.Components.Components;
+namespace WWW.Components.UI;
 
 public partial class QuestionView : ComponentBase
 {

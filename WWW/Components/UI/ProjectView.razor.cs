@@ -5,21 +5,20 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 using WWW.Services;
 
-namespace WWW.Components.Components;
+namespace WWW.Components.UI;
 
-public partial class GoalView : ComponentBase
+public partial class ProjectView : ComponentBase
 {
     [Inject]
     protected DatabaseContext Context { get; set; } = default!;
     [Inject] protected ProjectViewService ViewService { get; set; } = default!;
-    
+
     [Parameter, EditorRequired] public string Id { get; set; } = null;
     
-    private bool IsBeingDeleted { get; set; }
-    
-    public EditContext EditContext { get; set; } = default!;
+    private bool IsBeingDeleted {get; set;}
 
-    public Goal Goal { get; set; } = default!;
+    public Project Project { get; set; } = default!;
+    public EditContext EditContext { get; set; }
     
     protected override void OnParametersSet()
     {
@@ -37,27 +36,19 @@ public partial class GoalView : ComponentBase
     {
         await InvokeAsync(StateHasChanged);
     }
-
-    protected void Load()
+    
+    void IDisposable.Dispose()
     {
-        Goal = Context.Set<Goal>()
-            .Include(g => g.Questions)
-            .FirstOrDefault(g => g.Id == Id)!;
-        
-        EditContext = new EditContext(Goal);
+        ViewService.ListChanged -= OnListChanged;
     }
 
-    public void NewQuestion()
+    private void Load()
     {
-        ViewService.NewQuestion(Goal);
-    }
-
-    public void DeleteSelf()
-    {
-        if (IsBeingDeleted) return;
-        IsBeingDeleted = true;
+        Project = Context.Set<Project>()
+            .Include(p => p.Goals)
+            .FirstOrDefault(p => p.Id == Id)!;
         
-        ViewService.DeleteEntity(Goal);
+        EditContext = new EditContext(Project);
     }
 
     public void OnSubmit()
@@ -65,5 +56,18 @@ public partial class GoalView : ComponentBase
         Context.SaveChanges();
         EditContext.MarkAsUnmodified();
         ViewService.RefreshView();
+    }
+
+    public void NewGoal()
+    {
+        ViewService.NewGoal(Project);
+    }
+
+    public void DeleteSelf()
+    {
+        if (IsBeingDeleted) return;
+        IsBeingDeleted = true;
+        
+        ViewService.DeleteEntity(Project);
     }
 }
