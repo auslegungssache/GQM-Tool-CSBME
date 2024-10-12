@@ -41,7 +41,7 @@
     
     public void OnSubmit()
     {
-        Context.SaveChanges();
+        ViewService.Db.SaveChanges();
         EditContext.MarkAsUnmodified();
         ViewService.RefreshView();
     }

@@ -9,8 +9,6 @@ namespace WWW.Components.UI;
 
 public partial class ProjectView : ComponentBase
 {
-    [Inject]
-    protected DatabaseContext Context { get; set; } = default!;
     [Inject] protected ProjectViewService ViewService { get; set; } = default!;
 
     [Parameter, EditorRequired] public ProjectId Id { get; set; } = null;

@@ -10,9 +10,9 @@ public partial class ProjectViewService
         {
             Username = "local"
         };
-        db.Users.Add(user);
+        Db.Users.Add(user);
 
-        db.SaveChanges();
+        Db.SaveChanges();
         RefreshView();
 
         return user;
@@ -21,8 +21,8 @@ public partial class ProjectViewService
     public Project NewProject()
     {
         Project project = new();
-        db.Projects.Add(project);
-        db.SaveChanges();
+        Db.Projects.Add(project);
+        Db.SaveChanges();
 
         RefreshView();
 
@@ -34,7 +34,7 @@ public partial class ProjectViewService
         Goal goal = new();
         project.Goals.Add(goal);
 
-        db.SaveChanges();
+        Db.SaveChanges();
         RefreshView();
 
         return goal;
@@ -45,7 +45,7 @@ public partial class ProjectViewService
         Question question = new();
         goal.Questions.Add(question);
 
-        db.SaveChanges();
+        Db.SaveChanges();
         RefreshView();
 
         return question;

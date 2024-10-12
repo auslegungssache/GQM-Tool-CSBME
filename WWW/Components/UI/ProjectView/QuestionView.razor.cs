@@ -1,5 +1,4 @@
-﻿using Backend;
-using Backend.Entities;
+﻿using Backend.Entities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using WWW.Services;
@@ -8,8 +7,6 @@ namespace WWW.Components.UI;
 
 public partial class QuestionView : ComponentBase
 {
-    [Inject]
-    protected DatabaseContext Context { get; set; } = default!;
     [Inject] protected ProjectViewService ViewService { get; set; } = default!;
 
     
@@ -42,7 +39,7 @@ public partial class QuestionView : ComponentBase
     
     private void OnSubmit()
     {
-        Context.SaveChanges();
+        ViewService.Db.SaveChanges();
         EditContext.MarkAsUnmodified();
         ViewService.RefreshView();
     }
