@@ -2,7 +2,7 @@ using Backend;
 
 namespace WWW.Services;
 
-public partial class ProjectViewService()
+public partial class ProjectViewService() : IDisposable, IAsyncDisposable
 {
     public readonly DatabaseContext Db;
     public readonly DataService Data;
@@ -12,14 +12,14 @@ public partial class ProjectViewService()
         Db = db;
         Data = data;
     }
-    
-    public event EventHandler<EventArgs> ListChanged = delegate { };
-    protected void NotifyListChanged(object sender, EventArgs e)
-        => ListChanged.Invoke(sender, e);
 
-
-    public void RefreshView()
+    public async ValueTask DisposeAsync()
     {
-        NotifyListChanged(Projects, EventArgs.Empty);
+        await Db.DisposeAsync();
+    }
+    
+    public void Dispose()
+    {
+        Db.Dispose();
     }
 }

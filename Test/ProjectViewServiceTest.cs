@@ -34,7 +34,7 @@ public class ProjectViewServiceTest
     [Test]
     public void ServiceAccessible()
     {
-        var service = CreateService();
+        using var service = CreateService();
         
         Assert.That(service.Db, Is.Not.Null);
 
@@ -52,21 +52,27 @@ public class ProjectViewServiceTest
     public void IsDisposable()
     {
         DatabaseContext db;
-        
+
         {
-            var service = CreateService();
+            using var service = CreateService();
             db = service.Db;
             
-            Assert.That(db, Is.Not.Null);
+            Assert.DoesNotThrow(AccessDatabase);
         }
-        
-        Assert.That(db, Is.Null);
+
+        Assert.Throws<ObjectDisposedException>(AccessDatabase);
+        return;
+
+        void AccessDatabase()
+        {
+            _ = db.Database;
+        }
     }
 
     [Test]
     public void IsListenable()
     {
-        var service = CreateService();
+        using var service = CreateService();
         var toggle = false;
         
         void Callback(object sender, EventArgs args)
@@ -88,7 +94,7 @@ public class ProjectViewServiceTest
     [Test]
     public async Task NewAndDelete()
     {
-        var service = CreateService();
+        await using var service = CreateService();
 
         var project = service.NewProject();
         var goal = service.NewGoal(project);
@@ -112,7 +118,7 @@ public class ProjectViewServiceTest
     {
         // this could probably be removed from the class
         
-        var service = CreateService();
+        using var service = CreateService();
 
         #region project
         var project1 = service.NewProject();
