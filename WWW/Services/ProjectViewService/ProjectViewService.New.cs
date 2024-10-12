@@ -12,8 +12,7 @@ public partial class ProjectViewService
         };
         Db.Users.Add(user);
 
-        Db.SaveChanges();
-        RefreshView();
+        Save();
 
         return user;
     }
@@ -22,10 +21,9 @@ public partial class ProjectViewService
     {
         Project project = new();
         Db.Projects.Add(project);
-        Db.SaveChanges();
 
-        RefreshView();
-
+        Save();
+        
         return project;
     }
 
@@ -34,8 +32,7 @@ public partial class ProjectViewService
         Goal goal = new();
         project.Goals.Add(goal);
 
-        Db.SaveChanges();
-        RefreshView();
+        Save();
 
         return goal;
     }
@@ -45,8 +42,7 @@ public partial class ProjectViewService
         Question question = new();
         goal.Questions.Add(question);
 
-        Db.SaveChanges();
-        RefreshView();
+        Save();
 
         return question;
     }

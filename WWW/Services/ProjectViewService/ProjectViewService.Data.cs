@@ -8,6 +8,12 @@ public partial class ProjectViewService
     public IEnumerable<User> Users => Db.Users;
     public IEnumerable<Project> Projects => Db.Projects;
 
+    public void Save()
+    {
+        Db.SaveChanges();
+        RefreshView();
+    }
+
     public async Task<User?> GetEntity(UserId id)
     {
         return await Db.Users
