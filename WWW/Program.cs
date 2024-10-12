@@ -1,4 +1,5 @@
 using Backend;
+using Microsoft.EntityFrameworkCore;
 using WWW.Components;
 using WWW.Services;
 
@@ -8,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDbContextFactory<DatabaseContext>();
+string currentDirectory = Directory.GetCurrentDirectory();
+string dbPath = Path.Join(currentDirectory, "gqm.db");
+string connectionString = $"Data Source={dbPath}";
+builder.Services.AddDbContextFactory<DatabaseContext>(opt => opt.UseSqlite(connectionString));
 
 builder.Services.AddSingleton<DataService>();
 builder.Services.AddScoped<ProjectViewService>();
