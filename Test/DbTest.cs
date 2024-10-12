@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Test;
 
+[TestFixture]
 public class DbTest
 {
     private DbContextOptions<DatabaseContext> _dbOpt;

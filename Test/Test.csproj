@@ -30,6 +30,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Backend\Backend.csproj" />
+      <ProjectReference Include="..\WWW\WWW.csproj" />
     </ItemGroup>
 
 </Project>
