@@ -7,11 +7,11 @@ public class DataService
 {
     private readonly IDbContextFactory<DatabaseContext> dbContextFactory;
     
-    DatabaseContext _context;
+    public DatabaseContext Context;
 
     public DataService(IDbContextFactory<DatabaseContext> dbContextFactory)
     {
         this.dbContextFactory = dbContextFactory;
-        _context = dbContextFactory.CreateDbContext();
+        Context = dbContextFactory.CreateDbContext();
     }
 }
