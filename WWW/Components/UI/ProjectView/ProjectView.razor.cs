@@ -42,11 +42,10 @@ public partial class ProjectView : ComponentBase
         ViewService.ListChanged -= OnListChanged;
     }
 
-    private void Load()
+    private async void Load()
     {
-        Project = Context.Set<Project>()
-            .Include(p => p.Goals)
-            .FirstOrDefault(p => p.Id == Id)!;
+        Project = await ViewService.GetEntity(Id)
+            ?? throw new KeyNotFoundException($"No project found with id {Id}");
         
         EditContext = new EditContext(Project);
     }

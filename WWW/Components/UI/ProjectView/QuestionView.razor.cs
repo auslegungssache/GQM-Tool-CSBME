@@ -26,10 +26,10 @@ public partial class QuestionView : ComponentBase
         LoadQuestion();
     }
 
-    private void LoadQuestion()
+    private async void LoadQuestion()
     {
-        Question = Context.Set<Question>()
-            .Find(Id)!;
+        Question = await ViewService.GetEntity(Id)
+            ?? throw new KeyNotFoundException($"No question found with id {Id}");
         
         EditContext = new EditContext(Question);
     }

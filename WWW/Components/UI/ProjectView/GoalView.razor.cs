@@ -38,11 +38,10 @@ public partial class GoalView : ComponentBase
         await InvokeAsync(StateHasChanged);
     }
 
-    protected void Load()
+    protected async void Load()
     {
-        Goal = Context.Set<Goal>()
-            .Include(g => g.Questions)
-            .FirstOrDefault(g => g.Id == Id)!;
+        Goal = await ViewService.GetEntity(Id)
+               ?? throw new KeyNotFoundException($"No goal found with id {Id}");
         
         EditContext = new EditContext(Goal);
     }
