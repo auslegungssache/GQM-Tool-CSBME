@@ -1,0 +1,37 @@
+﻿@using Backend.Entities
+@rendermode InteractiveServer
+
+<div>
+    <div>Goal ID: @Id</div>
+
+    <EditForm EditContext="@EditContext" OnSubmit="@OnSubmit">
+        <div>
+            <InputText id="goal-title" @bind-Value="@Goal.Title"/>
+            <InputSelect @bind-Value="@Goal.Priority">
+                <option value="@GoalPriority.High">High</option>
+                <option value="@GoalPriority.Medium">Medium</option>
+                <option value="@GoalPriority.Low">Low</option>
+            </InputSelect>
+        </div>
+
+        <div>
+            <button type="submit" @onclick="@OnSubmit">Submit</button>
+        </div>
+    </EditForm>
+    
+    <button @onclick="Delete">Delete Goal</button>
+    
+    <div>
+        <h4>Questions</h4>
+
+        <button @onclick="NewQuestion">New Question</button>
+        <ol>
+            @foreach (var question in Goal.Questions)
+            {
+                <li>
+                    <QuestionView Id="@question.Id" Refresh="Refresh" />
+                </li>
+            }
+        </ol>
+    </div>
+</div>

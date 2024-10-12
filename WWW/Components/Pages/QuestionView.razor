@@ -1,0 +1,16 @@
+﻿@rendermode InteractiveServer
+
+<div>
+    <div>Question ID: @Id</div>
+    <EditForm EditContext="EditContext" OnSubmit="@OnSubmit">
+        <div>
+            <InputText id="question-title" @bind-Value="@Question.Title"/>
+        </div>
+        
+        <div>
+            <button type="submit" @onclick="@OnSubmit">Submit</button>
+        </div>
+    </EditForm>
+    
+    <button @onclick="Delete">Delete Question</button>
+</div>

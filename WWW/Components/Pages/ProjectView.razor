@@ -1,0 +1,31 @@
+﻿@rendermode InteractiveServer
+
+<div>
+    <div>Project ID: @Id</div>
+    
+    <EditForm EditContext="EditContext" OnSubmit="@OnSubmit">
+        <div>
+            <InputText id="project-title" @bind-Value="@Project.Title"/>
+        </div>
+
+        <div>
+            <button type="submit" @onclick="@OnSubmit">Submit</button>
+        </div>
+    </EditForm>
+
+    <button @onclick="Delete">Delete Project</button>
+
+    <div>
+        <h3>Goals</h3>
+        <button @onclick="NewGoal">New Goal</button>
+
+        <ol>
+            @foreach (var goal in Project.Goals)
+            {
+                <li>
+                    <GoalView Id="@goal.Id" Refresh="Refresh" />
+                </li>
+            }
+        </ol>
+    </div>
+</div>
