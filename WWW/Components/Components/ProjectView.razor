@@ -1,4 +1,5 @@
-﻿@rendermode InteractiveServer
+﻿@implements IDisposable
+@rendermode InteractiveServer
 
 <div>
     <div>Project ID: @Id</div>
@@ -13,7 +14,7 @@
         </div>
     </EditForm>
 
-    <button @onclick="Delete">Delete Project</button>
+    <button @onclick="DeleteSelf" disabled="@IsBeingDeleted">Delete Project</button>
 
     <div>
         <h3>Goals</h3>
@@ -23,7 +24,7 @@
             @foreach (var goal in Project.Goals)
             {
                 <li>
-                    <GoalView Id="@goal.Id" Refresh="Refresh" />
+                    <GoalView Id="@goal.Id" @key="goal.Id" />
                 </li>
             }
         </ol>

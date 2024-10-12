@@ -1,5 +1,6 @@
 using Backend;
 using WWW.Components;
+using WWW.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDbContext<DatabaseContext>();
+builder.Services.AddDbContextFactory<DatabaseContext>();
+
+builder.Services.AddSingleton<DataService>();
+builder.Services.AddScoped<ProjectViewService>();
 
 var app = builder.Build();
 

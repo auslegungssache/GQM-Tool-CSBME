@@ -6,6 +6,7 @@ public class Goal
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string Id { get; set; }
+    public Project Project { get; set; }
 
     public string Title { get; set; } = "";
     public GoalPriority Priority { get; set; } = GoalPriority.Medium;

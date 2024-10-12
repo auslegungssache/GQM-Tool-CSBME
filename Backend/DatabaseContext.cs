@@ -10,6 +10,21 @@ namespace Backend
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Project>()
+                .HasMany(p => p.Goals)
+                .WithOne(g => g.Project)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<Goal>()
+                .HasMany(g => g.Questions)
+                .WithOne(q => q.Goal)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
         public DatabaseContext()
         {
             var path = Directory.GetCurrentDirectory();

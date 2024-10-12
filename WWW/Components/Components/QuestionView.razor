@@ -12,5 +12,5 @@
         </div>
     </EditForm>
     
-    <button @onclick="Delete">Delete Question</button>
+    <button @onclick="Delete" disabled="@IsBeingDeleted">Delete Question</button>
 </div>

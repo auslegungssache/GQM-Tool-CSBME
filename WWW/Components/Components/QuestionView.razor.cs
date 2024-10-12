@@ -3,23 +3,31 @@ using Backend.Entities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
+using WWW.Services;
 
-namespace WWW.Components.Pages;
+namespace WWW.Components.Components;
 
 public partial class QuestionView : ComponentBase
 {
     [Inject]
     protected DatabaseContext Context { get; set; } = default!;
+    [Inject] protected ProjectViewService ViewService { get; set; } = default!;
+
     
     [Parameter, EditorRequired] public string Id { get; set; } = null;
-    
-    [Parameter, EditorRequired]
-    public Action Refresh { get; set; } = null;
-    
     public Question Question { get; set; } = null;
+    
+
+    private bool IsBeingDeleted { get; set; } = false;
+
     public EditContext EditContext { get; set; } = default!;
     
     protected override void OnInitialized()
+    {
+        LoadQuestion();
+    }
+
+    private void LoadQuestion()
     {
         Question = Context.Set<Question>()
             .Find(Id)!;
@@ -27,19 +35,26 @@ public partial class QuestionView : ComponentBase
         EditContext = new EditContext(Question);
     }
 
-    protected void OnSubmit()
+    protected override void OnParametersSet()
+    {
+        IsBeingDeleted = false;
+        LoadQuestion();
+    }
+    
+    private void OnSubmit()
     {
         Context.SaveChanges();
         EditContext.MarkAsUnmodified();
-        Refresh?.Invoke();
+        ViewService.RefreshView();
     }
 
-    public void Delete()
+    private void Delete()
     {
-        Context.Set<Question>()
-            .Remove(Question);
-
-        Context.SaveChanges();
-        Refresh();
+        if (IsBeingDeleted) return;
+        
+        IsBeingDeleted = true;
+        StateHasChanged();
+        
+        ViewService.DeleteEntity(Question);
     }
 }

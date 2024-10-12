@@ -1,28 +1,30 @@
 ﻿@page "/"
+@using WWW.Components.Components
+@implements IDisposable
 @rendermode InteractiveServer
 
 <div>
-<ul>
-    @foreach (var user in Users())
-    {
-        <li>
-            <div>ID</div>
-            <div>@user.Id</div>
-        </li>
-    }
-</ul>
+    <ul>
+        @foreach (var user in ViewService.Users)
+        {
+            <li>
+                <div>ID</div>
+                <div>@user.Id</div>
+            </li>
+        }
+    </ul>
 </div>
-<button @onclick="NewUser">New user</button>
+<button @onclick="() => ViewService.NewUser()">New user</button>
 
 <div>
     <h2>Projects</h2>
-    <button @onclick="NewProject">New Project</button>
+    <button @onclick="() => ViewService.NewProject()">New Project</button>
 
     <ol>
-        @foreach (var project in Projects)
+        @foreach (var project in ViewService.Projects)
         {
             <li>
-                <ProjectView Id="@project.Id" Refresh="Refresh" />
+                <ProjectView Id="@project.Id" @key="project.Id" />
             </li>
         }    
     </ol>
