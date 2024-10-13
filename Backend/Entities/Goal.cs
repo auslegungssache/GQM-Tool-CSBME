@@ -1,11 +1,11 @@
 ﻿namespace Backend.Entities;
 
-public class Goal
+public class Goal : CoreEntity
 {
     public GoalId Id { get; set; } = GoalId.Make();
     public Project Project { get; set; }
 
-    public string Title { get; set; } = "";
+    public override string Title { get; set; } = "";
     public GoalPriority Priority { get; set; } = GoalPriority.Medium;
     public List<Question> Questions { get; set; } = [];
 }

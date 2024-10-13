@@ -1,11 +1,11 @@
 ﻿namespace Backend.Entities;
 
-public class Question
+public class Question : CoreEntity
 {
     public QuestionId Id { get; set; } = QuestionId.Make();
     public Goal Goal { get; set; }
 
-    public string Title { get; set; } = "";
+    public override string Title { get; set; } = "";
     public string Metric { get; set; } = "";
 
     public bool Done { get; set; } = false;

@@ -1,12 +1,15 @@
-﻿namespace Backend.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Backend.Entities;
 
 public enum Role { Admin, User }
 
-public class User
+public class User : CoreEntity
 {
     public UserId Id { get; set; } = UserId.Make();
     
-    public string Username { get; set; }
+    [Column("Username")]
+    public override string Title { get; set; }
     
     public Role Role { get; set; }
 }

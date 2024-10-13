@@ -1,12 +1,11 @@
 ﻿namespace Backend.Entities;
 
-public class Project
+public class Project : CoreEntity
 {
     public ProjectId Id { get; set; } = ProjectId.Make();
 
-    public string Title { get; set; } = "";
+    public override string Title { get; set; } = "";
     public List<Goal> Goals { get; set; } = [];
-    
 }
 
 public record ProjectId(string Value) : Id

@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using WWW.Components.UI
+@inherits LayoutComponentBase
 
 
 <MudLayout>
@@ -19,21 +20,7 @@
         </MudStack>
     </MudAppBar>
     
-    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Dark">
-        <MudStack>
-            <MudDivider/>
-            
-            <MudTreeView T="string" ReadOnly ExpandOnClick>
-                <MudTreeViewItem Text="Users">
-                    <MudTreeViewItem Text="Installation"/>
-                </MudTreeViewItem>
-                <MudTreeViewItem Text="Projects">
-                    <MudTreeViewItem Text="Avatar" Value='"MudAvatar"'/>
-                    <MudTreeViewItem Text="Button" Value='"MudButton"'/>
-                </MudTreeViewItem>
-            </MudTreeView>
-        </MudStack>
-    </MudDrawer>
+    <Drawer />
     
     <MudMainContent>
         @Body

@@ -1,0 +1,34 @@
+@namespace WWW.Components.UI
+@rendermode InteractiveServer
+
+<MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Dark">
+    <MudStack>
+        <MudDivider/>
+            
+        <MudTreeView T="string" ReadOnly>
+            <MudTreeViewItem Text="Users" Expanded>
+                @foreach (var user in ViewService.Users)
+                {
+                    <MudTreeViewItem Text=@($"\"{user.Title}\"") />
+                }
+            </MudTreeViewItem>
+            
+            <MudTreeViewItem Text="Projects" Expanded>
+                @foreach (var project in ViewService.Projects)
+                {
+                    <MudTreeViewItem Text=@($"\"{project.Title}\"") Expanded>
+                        @foreach (var goal in project.Goals)
+                        {
+                            <MudTreeViewItem Text=@($"\"{goal.Title}\"") Expanded>
+                                @foreach (var question in goal.Questions)
+                                {
+                                    <MudTreeViewItem Text=@($"\"{question.Title}\"") />
+                                }
+                            </MudTreeViewItem>
+                        }
+                    </MudTreeViewItem>
+                }
+            </MudTreeViewItem>
+        </MudTreeView>
+    </MudStack>
+</MudDrawer>

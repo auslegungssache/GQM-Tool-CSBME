@@ -7,7 +7,7 @@ public partial class ProjectViewService
     public void DeleteEntity(User user)
     {
         Db.Remove(user);
-        Logger.LogInformation("""User "{username}" Id "{id}" was deleted""", user.Username, user.Id);
+        Logger.LogInformation("""User "{username}" Id "{id}" was deleted""", user.Title, user.Id);
         
         Save();
     }

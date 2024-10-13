@@ -1,8 +1,6 @@
-﻿using Backend;
-using Backend.Entities;
+﻿using Backend.Entities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.EntityFrameworkCore;
 using WWW.Services;
 
 namespace WWW.Components.UI;

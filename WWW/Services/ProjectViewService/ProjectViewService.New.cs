@@ -4,14 +4,33 @@ namespace WWW.Services;
 
 public partial class ProjectViewService
 {
+    private string NewName<T>(string defaultName) where T : CoreEntity
+    {
+        int i = 0;
+        while (true)
+        {
+            var nameSuffix = i != 0 ? $" ({i})" : string.Empty;
+            var name = $"{defaultName}{nameSuffix}";
+            if (Db.Set<T>().Any(e => e.Title == name))
+            {
+                i++;
+            }
+            else
+            {
+                return name;
+            }
+
+        }
+    }
+    
     public User NewUser()
     {
-        User user = new User
+        User user = new ()
         {
-            Username = "local"
+            Title = NewName<User>("New User")
         };
         Db.Users.Add(user);
-        Logger.LogInformation("""User "{username}" Id "{id}" was created""", user.Username, user.Id);
+        Logger.LogInformation("""User "{username}" Id "{id}" was created""", user.Title, user.Id);
 
         Save();
 
@@ -20,7 +39,10 @@ public partial class ProjectViewService
 
     public Project NewProject()
     {
-        Project project = new();
+        Project project = new()
+        {
+            Title = NewName<Project>("New Project")
+        };
         Db.Projects.Add(project);
         Logger.LogInformation("""Project "{title}" Id "{id}" was created""",project.Title, project.Id);
 
@@ -31,7 +53,10 @@ public partial class ProjectViewService
 
     public Goal NewGoal(Project project)
     {
-        Goal goal = new();
+        Goal goal = new()
+        {
+            Title = NewName<Goal>("New Goal")
+        };
         project.Goals.Add(goal);
         Logger.LogInformation(
             """Goal "{title}" Id "{id}", attached to project "{projectTitle}" Id "{projectId}", was created""",
@@ -45,7 +70,10 @@ public partial class ProjectViewService
 
     public Question NewQuestion(Goal goal)
     {
-        Question question = new();
+        Question question = new()
+        {
+            Title = NewName<Question>("New Question")
+        };
         goal.Questions.Add(question);
         Logger.LogInformation(
             """Question "{title}" Id "{id}", attached to goal "{goalTitle}" Id "{goalId}", was created""",
