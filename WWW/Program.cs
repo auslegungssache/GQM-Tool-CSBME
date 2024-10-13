@@ -1,6 +1,7 @@
 using Backend;
 using Microsoft.EntityFrameworkCore;
 using WWW.Components;
+using WWW.Logging;
 using WWW.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
+builder.EnableLogging();
 
 string currentDirectory = Directory.GetCurrentDirectory();
 string dbPath = Path.Join(currentDirectory, "gqm.db");
