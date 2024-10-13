@@ -11,15 +11,15 @@
         </div>
 
         <div>
-            <button type="submit" @onclick="@OnSubmit">Submit</button>
+            <MudButton Variant="Variant.Outlined" type="submit" OnClick="@OnSubmit">Submit</MudButton>
         </div>
     </EditForm>
 
-    <button @onclick="DeleteSelf" disabled="@IsBeingDeleted">Delete Project</button>
+    <MudButton Variant="Variant.Outlined" OnClick="DeleteSelf" disabled="@IsBeingDeleted">Delete Project</MudButton>
 
     <div>
         <h3>Goals</h3>
-        <button @onclick="NewGoal">New Goal</button>
+        <MudButton Variant="Variant.Outlined" OnClick="NewGoal">New Goal</MudButton>
 
         <ol>
             @foreach (var goal in Project.Goals)

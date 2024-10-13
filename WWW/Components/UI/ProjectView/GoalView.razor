@@ -8,24 +8,24 @@
     <EditForm EditContext="@EditContext" OnSubmit="@OnSubmit">
         <div>
             <InputText id="goal-title" @bind-Value="@Goal.Title"/>
-            <InputSelect @bind-Value="@Goal.Priority">
-                <option value="@GoalPriority.High">High</option>
-                <option value="@GoalPriority.Medium">Medium</option>
-                <option value="@GoalPriority.Low">Low</option>
-            </InputSelect>
+            <MudSelect @bind-Value="@Goal.Priority">
+                <MudSelectItem Value="@GoalPriority.High">High</MudSelectItem>
+                <MudSelectItem Value="@GoalPriority.Medium">Medium</MudSelectItem>
+                <MudSelectItem Value="@GoalPriority.Low">Low</MudSelectItem>
+            </MudSelect>
         </div>
 
         <div>
-            <button type="submit" @onclick="@OnSubmit">Submit</button>
+            <MudButton Variant="Variant.Outlined" type="submit" OnClick="@OnSubmit">Submit</MudButton>
         </div>
     </EditForm>
     
-    <button @onclick="DeleteSelf" disabled="@IsBeingDeleted">Delete Goal</button>
+    <MudButton Variant="Variant.Outlined" OnClick="DeleteSelf" disabled="@IsBeingDeleted">Delete Goal</MudButton>
     
     <div>
         <h4>Questions</h4>
 
-        <button @onclick="NewQuestion">New Question</button>
+        <MudButton Variant="Variant.Outlined" OnClick="NewQuestion">New Question</MudButton>
         <ol>
             @foreach (var question in Goal.Questions)
             { 

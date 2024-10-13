@@ -9,9 +9,9 @@
         </div>
         
         <div>
-            <button type="submit" @onclick="@OnSubmit">Submit</button>
+            <MudButton Variant="Variant.Outlined" type="submit" OnClick="@OnSubmit">Submit</MudButton>
         </div>
     </EditForm>
     
-    <button @onclick="Delete" disabled="@IsBeingDeleted">Delete Question</button>
+    <MudButton Variant="Variant.Outlined" OnClick="Delete" disabled="@IsBeingDeleted">Delete Question</MudButton>
 </div>

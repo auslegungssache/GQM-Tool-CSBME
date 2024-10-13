@@ -1,9 +1,47 @@
 ﻿@inherits LayoutComponentBase
 
-@Body
 
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
-</div>
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudStack Row AlignItems="AlignItems.Center">
+            <MudAvatar></MudAvatar>
+            <MudText Typo="Typo.h6">Quality Assurance</MudText>
+        </MudStack>
+        
+        <MudSpacer />
+        <MudStack Row>
+            <MudText Typo="Typo.h5">GQM-Tool</MudText>
+        </MudStack>
+        <MudSpacer />
+        
+        <MudStack Row AlignItems="AlignItems.Center">
+            <MudButton>Logout</MudButton>
+        </MudStack>
+    </MudAppBar>
+    
+    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Color="Color.Dark">
+        <MudStack>
+            <MudDivider/>
+            
+            <MudTreeView T="string" ReadOnly ExpandOnClick>
+                <MudTreeViewItem Text="Users">
+                    <MudTreeViewItem Text="Installation"/>
+                </MudTreeViewItem>
+                <MudTreeViewItem Text="Projects">
+                    <MudTreeViewItem Text="Avatar" Value='"MudAvatar"'/>
+                    <MudTreeViewItem Text="Button" Value='"MudButton"'/>
+                </MudTreeViewItem>
+            </MudTreeView>
+        </MudStack>
+    </MudDrawer>
+    
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+</MudLayout>

@@ -3,29 +3,44 @@
 @implements IDisposable
 @rendermode InteractiveServer
 
-<div>
-    <ul>
-        @foreach (var user in ViewService.Users)
-        {
-            <li>
-                <div>ID</div>
-                <div>@user.Id</div>
-            </li>
-        }
-    </ul>
-</div>
-<button @onclick="() => ViewService.NewUser()">New user</button>
 
-<div>
-    <h2>Projects</h2>
-    <button @onclick="() => ViewService.NewProject()">New Project</button>
+<MudThemeProvider />
+<MudPopoverProvider />
 
-    <ol>
-        @foreach (var project in ViewService.Projects)
-        {
-            <li>
-                <ProjectView Id="@project.Id" @key="project.Id" />
-            </li>
-        }    
-    </ol>
-</div>
+<MudDialogProvider />
+
+<MudSnackbarProvider />
+
+<main>
+    <MudStack Spacing="4">
+        <MudPaper>
+            <MudText Typo="Typo.h4">Users</MudText>
+
+            <ul>
+                @foreach (var user in ViewService.Users)
+                {
+                    <li>
+                        <div>ID</div>
+                        <div>@user.Id</div>
+                    </li>
+                }
+            </ul>
+
+            <MudButton Variant="Variant.Outlined" OnClick="() => ViewService.NewUser()">New user</MudButton>
+        </MudPaper>
+
+        <MudPaper>
+            <MudText Typo="Typo.h4">Projects</MudText>
+            <MudButton Variant="Variant.Outlined" OnClick="() => ViewService.NewProject()">New Project</MudButton>
+
+            <ol>
+                @foreach (var project in ViewService.Projects)
+                {
+                    <li>
+                        <ProjectView Id="@project.Id" @key="project.Id"/>
+                    </li>
+                }
+            </ol>
+        </MudPaper>
+    </MudStack>
+</main>

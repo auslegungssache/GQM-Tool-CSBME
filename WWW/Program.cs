@@ -1,5 +1,6 @@
 using Backend;
 using Microsoft.EntityFrameworkCore;
+using MudBlazor.Services;
 using WWW.Components;
 using WWW.Logging;
 using WWW.Services;
@@ -19,6 +20,8 @@ string connectionString = $"Data Source={dbPath}";
 builder.Services.AddDbContextFactory<DatabaseContext>(opt => opt.UseSqlite(connectionString));
 
 builder.Services.AddScoped<ProjectViewService>();
+
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
