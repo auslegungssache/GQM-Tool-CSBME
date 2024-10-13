@@ -11,6 +11,7 @@ public partial class ProjectViewService
             Username = "local"
         };
         Db.Users.Add(user);
+        Logger.LogInformation("""User "{username}" Id "{id}" was created""", user.Username, user.Id);
 
         Save();
 
@@ -21,6 +22,7 @@ public partial class ProjectViewService
     {
         Project project = new();
         Db.Projects.Add(project);
+        Logger.LogInformation("""Project "{title}" Id "{id}" was created""",project.Title, project.Id);
 
         Save();
         
@@ -31,6 +33,10 @@ public partial class ProjectViewService
     {
         Goal goal = new();
         project.Goals.Add(goal);
+        Logger.LogInformation(
+            """Goal "{title}" Id "{id}", attached to project "{projectTitle}" Id "{projectId}", was created""",
+            goal.Title, goal.Id,
+            project.Title, project.Id);
 
         Save();
 
@@ -41,6 +47,10 @@ public partial class ProjectViewService
     {
         Question question = new();
         goal.Questions.Add(question);
+        Logger.LogInformation(
+            """Question "{title}" Id "{id}", attached to goal "{goalTitle}" Id "{goalId}", was created""",
+            question.Title, question.Id,
+            goal.Title, goal.Id);
 
         Save();
 

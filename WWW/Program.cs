@@ -9,14 +9,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 string currentDirectory = Directory.GetCurrentDirectory();
 string dbPath = Path.Join(currentDirectory, "gqm.db");
 string connectionString = $"Data Source={dbPath}";
+
 builder.Services.AddDbContextFactory<DatabaseContext>(opt => opt.UseSqlite(connectionString));
 
 builder.Services.AddScoped<ProjectViewService>();
 
 var app = builder.Build();
+
+app.Logger.LogInformation("Database location: {path}", dbPath);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

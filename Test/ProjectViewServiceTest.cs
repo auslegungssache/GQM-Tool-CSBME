@@ -1,6 +1,10 @@
 using Backend;
 using Backend.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Moq;
+using NUnit.Framework.Internal;
 using WWW.Services;
 
 namespace Test;
@@ -28,7 +32,10 @@ public class ProjectViewServiceTest
     {
         var ctx = new DatabaseContext(_dbOpt);
         
-        return new ProjectViewService(ctx);
+        var mock = new Mock<ILogger<ProjectViewService>>();
+        var logger = mock.Object;
+        
+        return new ProjectViewService(ctx, logger);
     }
 
     [Test]
