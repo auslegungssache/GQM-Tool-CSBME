@@ -52,7 +52,9 @@ public partial class GoalView : ComponentBase
     public void DeleteSelf()
     {
         if (IsBeingDeleted) return;
+        
         IsBeingDeleted = true;
+        StateHasChanged();
         
         ViewService.DeleteEntity(Goal);
     }

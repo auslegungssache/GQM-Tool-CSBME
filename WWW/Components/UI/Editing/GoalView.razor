@@ -16,16 +16,33 @@
         </div>
 
         <div>
-            <MudButton Variant="Variant.Outlined" type="submit" OnClick="@OnSubmit">Submit</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save"
+                       type="submit" OnClick="@OnSubmit">
+                Submit
+            </MudButton>
         </div>
     </EditForm>
-    
-    <MudButton Variant="Variant.Outlined" OnClick="DeleteSelf" disabled="@IsBeingDeleted">Delete Goal</MudButton>
+
+    <MudButton Variant="Variant.Filled" OnClick="DeleteSelf" Disabled="@IsBeingDeleted" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">
+        @if (IsBeingDeleted)
+        {
+            <MudProgressCircular Style="margin-right: 0.5rem;" Size="Size.Small" Indeterminate="true"/>
+            <MudText>Deleting</MudText>
+        }
+        else
+        {
+            <MudText>Delete Goal</MudText>
+        }
+    </MudButton>
     
     <div>
         <h4>Questions</h4>
 
-        <MudButton Variant="Variant.Outlined" OnClick="NewQuestion">New Question</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Create"
+                   OnClick="NewQuestion">
+            New Question
+        </MudButton>
+        
         <ol>
             @foreach (var question in Goal.Questions)
             { 

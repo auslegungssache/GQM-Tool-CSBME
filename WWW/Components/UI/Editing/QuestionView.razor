@@ -9,9 +9,22 @@
         </div>
         
         <div>
-            <MudButton Variant="Variant.Outlined" type="submit" OnClick="@OnSubmit">Submit</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save"
+                       type="submit" OnClick="@OnSubmit">
+                Submit
+            </MudButton>
         </div>
     </EditForm>
     
-    <MudButton Variant="Variant.Outlined" OnClick="Delete" disabled="@IsBeingDeleted">Delete Question</MudButton>
+    <MudButton Variant="Variant.Filled" OnClick="DeleteSelf" Disabled="@IsBeingDeleted" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">
+        @if (IsBeingDeleted)
+        {
+            <MudProgressCircular Style="margin-right: 0.5rem;" Size="Size.Small" Indeterminate="true"/>
+            <MudText>Deleting</MudText>
+        }
+        else
+        {
+            <MudText>Delete Question</MudText>
+        }
+    </MudButton>
 </div>

@@ -11,15 +11,31 @@
         </div>
 
         <div>
-            <MudButton Variant="Variant.Outlined" type="submit" OnClick="@OnSubmit">Submit</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save"
+                       type="submit" OnClick="@OnSubmit">
+                Submit
+            </MudButton>
         </div>
     </EditForm>
 
-    <MudButton Variant="Variant.Outlined" OnClick="DeleteSelf" disabled="@IsBeingDeleted">Delete Project</MudButton>
+    <MudButton Variant="Variant.Filled" OnClick="DeleteSelf" Disabled="@IsBeingDeleted" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">
+        @if (IsBeingDeleted)
+        {
+            <MudProgressCircular Style="margin-right: 0.5rem;" Size="Size.Small" Indeterminate="true"/>
+            <MudText>Deleting</MudText>
+        }
+        else
+        {
+            <MudText>Delete Project</MudText>
+        }
+    </MudButton>
 
     <div>
         <h3>Goals</h3>
-        <MudButton Variant="Variant.Outlined" OnClick="NewGoal">New Goal</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Create"
+                   OnClick="NewGoal">
+            New Goal
+        </MudButton>
 
         <ol>
             @foreach (var goal in Project.Goals)
@@ -49,7 +65,9 @@
     public void DeleteSelf()
     {
         if (IsBeingDeleted) return;
+        
         IsBeingDeleted = true;
+        StateHasChanged();
         
         ViewService.DeleteEntity(Project);
     }

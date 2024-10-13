@@ -44,7 +44,7 @@ public partial class QuestionView : ComponentBase
         ViewService.RefreshView();
     }
 
-    private void Delete()
+    private void DeleteSelf()
     {
         if (IsBeingDeleted) return;
         
