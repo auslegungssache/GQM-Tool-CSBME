@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.csproj", "{44FC97CF-2C04-426F-B638-FE21F7B5E000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{34DFE395-0644-438F-A5FE-13E0B5ED3B3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUnit", "TestUnit\TestUnit.csproj", "{34DFE395-0644-438F-A5FE-13E0B5ED3B3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFrontend", "TestFrontend\TestFrontend.csproj", "{E427022F-A11F-484A-97A1-F36D8CCE9F19}"
 EndProject
