@@ -14,7 +14,6 @@ string dbPath = Path.Join(currentDirectory, "gqm.db");
 string connectionString = $"Data Source={dbPath}";
 builder.Services.AddDbContextFactory<DatabaseContext>(opt => opt.UseSqlite(connectionString));
 
-builder.Services.AddSingleton<DataService>();
 builder.Services.AddScoped<ProjectViewService>();
 
 var app = builder.Build();

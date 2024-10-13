@@ -5,12 +5,10 @@ namespace WWW.Services;
 public partial class ProjectViewService() : IDisposable, IAsyncDisposable
 {
     public readonly DatabaseContext Db;
-    public readonly DataService Data;
 
-    public ProjectViewService(DatabaseContext db, DataService data) : this()
+    public ProjectViewService(DatabaseContext db) : this()
     {
         Db = db;
-        Data = data;
     }
 
     public async ValueTask DisposeAsync()

@@ -28,7 +28,7 @@ public class ProjectViewServiceTest
     {
         var ctx = new DatabaseContext(_dbOpt);
         
-        return new ProjectViewService(ctx, null);
+        return new ProjectViewService(ctx);
     }
 
     [Test]
